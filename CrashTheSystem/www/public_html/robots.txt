@@ -1,0 +1,11 @@
+# Look away, human!
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /cores/
+Disallow: /images/
+Disallow: /css/
+Disallow: /js/
+Disallow: /wp-admin/
+Disallow: /api/
+Disallow: secr3t.txt

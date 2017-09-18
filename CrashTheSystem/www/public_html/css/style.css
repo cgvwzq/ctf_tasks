@@ -1,0 +1,23 @@
+div#main {
+	margin: 0 auto;
+	width: 80%;
+} 
+
+h3 {
+	font-family: monospace;
+}
+
+.center {
+	margin: auto;
+	text-align: center;
+}
+
+img {
+	max-width: 50%;
+}
+
+#footer {
+	margin: 20px auto;
+	width: 80%;
+	font-size: 13px;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "CrashTheSystem",
+  "version": "0.0.1",
+  "description": "Web|Forensic challenge for NN17 CTF",
+  "main": "main.js",
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "author": "cgvwzq",
+  "gypfile": true,
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "fs": "0.0.1-security"
+  }
+}
