@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ANONYMAUXSS INTERGALATIC SMS</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.2/purify.min.js"></script>
+	<script src="js/app.js"></script>
+	<!-- no me hago responsable de posibles danos cerebrales causados, por la ingesta de tan lirica y original belleza -->
+	<style>
+	body {
+		margin: 20px auto;
+		width: 80%;
+		background: url('img/phones.png') no-repeat fixed center;
+		font-family: "Courier New", Courier, "Lucida Sans Typewriter", monospace;
+	}
+	h1,h2,h3,h4,span {
+		background-color: #2F4F4F;
+		color: white;
+	}
+	p {
+		padding: 2px;
+		font-size: small;
+		background-color: white;
+	}
+	#display {
+		margin: 5px;
+		padding: 5px;
+		background-color: lightgrey;
+	}
+	marquee {
+		color: white;
+	}
+	</style>
+</head>
+<body>
+	<h3>welcome to the... sup3r l33t ANONYMAUXSS INTERGALATIC SMS syst3m!</h3>
+	<p>Ephemeral communication across the multiverse. Send your private and anonymouse message with your secret <i>*plumbus*</i> secret. To anywhere, to anyone. Quantum privacy preserved. IT'S FREEEE MORTY!!! LOOK, FREEE <s>XSS</s> SMS!!!</p>
+	<!-- Much h4x0r, s0 oldSkull -->
+	<label>Get private msg: </label><input id="secret" name="secret" placeholder="secret">
+	<button onclick="getMessage(previousElementSibling.value)">X</button>
+	<div id="display">
+		...
+	</div>
+	<hr>
+	<h4>New message:</h4>
+	<form name="send">
+		<input name="secret" placeholder="secret"><br>
+		<textarea style="width:40%;height:100px" name="msg" placeholder="introduce your ephemeral message..."></textarea><br>
+	</form>
+	<button onclick="sendMessage(previousElementSibling)">Cybersubmit</button>
+	<hr>
+	<div id="report">
+		<!-- TODO: add menu for reporting <a href="#" onclick="report()>report</a> -->
+	</div>
+	<div id="footer"><marquee direction="right">8======= by Ka0labs =======D ~~</marquee></div>
+</body>
+</html>
