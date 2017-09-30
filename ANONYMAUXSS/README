@@ -26,7 +26,7 @@ $ docker build -t anonymauxss .
 ## Run docker:
 
 ```
-$ docker run -d --name anonymauxss --restart=always -p 9999:9999 anonymauxss 
+$ docker run -d --name anonymauxss --add-host=nn7ed.ka0labs.org:127.0.0.1 --restart=always -p 9999:9999 anonymauxss
 ```
 
 ## Writeup:
