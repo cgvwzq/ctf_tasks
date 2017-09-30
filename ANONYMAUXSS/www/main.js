@@ -87,9 +87,7 @@ async function processReport(msg) {
 	urls = urls.filter(u => (u && (u.protocol == 'http:' || u.protocol == 'https:')));
 	if (urls.length == 0) return;
 	let visit = urls[0].href;
-	console.log("visiting " + visit + "...");
-	// const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
-	const browser = await puppeteer.launch();
+	const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
 	const page = await browser.newPage();
 	await page.setCookie({
 			name : 'XSuperSecretCustomToken',
