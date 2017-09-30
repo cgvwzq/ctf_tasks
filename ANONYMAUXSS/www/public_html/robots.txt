@@ -1,0 +1,3 @@
+# Look away, human!
+User-agent: *
+Disallow: /admin/
