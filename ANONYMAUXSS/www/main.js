@@ -88,8 +88,8 @@ async function processReport(msg) {
 	if (urls.length == 0) return;
 	let visit = urls[0].href;
 	console.log("visiting " + visit + "...");
-	// remove args in server with new kernel
-	const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+	// const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 	await page.setCookie({
 			name : 'XSuperSecretCustomToken',
