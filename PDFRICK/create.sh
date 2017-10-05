@@ -4,7 +4,7 @@
 # wat2wasm life.wat -o life.wasm
 
 # Generate array buffer for pixels.js
-# node -p "'[' + new Uint8Array(require('fs').readFileSync('life.wasm').buffer) + ']'"
+# xxd -i life.wasm
 
 node pixels.js > life.pdf
 cat rick.pdf >> life.pdf
