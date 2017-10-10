@@ -6,9 +6,9 @@
 
 ## Description:
 
-NodeJS backend will crash and generate a coredump after every uncatched exception. It's easy to generate an exception in Express, just make the decoding of URL fail. The coredump is accessible via web (each crash generates a unique id that the user receives in a header). After downloading the coredump the JS source is available (e.g., with `strings core`), but the authentication module is a native addon (coded in C++) and forces to use `gdb`, `lldb`, `llnode` or whatever.
+NodeJS backend will crash and generate a coredump after every uncatched exception. It's easy to generate an exception in Express, just make the decoding of URL fail. The coredump is accessible via web (each crash generates a unique id that the user receives). After downloading the coredump the JS source is available (e.g., with `strings core`), but the authentication module is a native addon (coded in C++) and forces to use `gdb`, `lldb`, `llnode` or anyother tool.
 
-The authentication module accepts a user and password and compares them with two stored values (performing a simple XOR operation with a short stored key). If the values are valid, the flag is read from a file and displayed to the user.
+The authentication module accepts a user and password and compares them with two stored values. If the values are valid, the flag is read from a file and displayed to the user.
 
 ## Hints:
 * The title of the challenge.
@@ -31,11 +31,13 @@ $ docker run -d --name crashthesystem --restart=always -p 3000:3000 crashthesyst
 
 robots.txt (hint for /cores/ directory)
 
-obtain coredump, strings to understand JS
+Obtain coredump after crashing Express (e.g.: `http://localhost:3000/api/%e4`)
 
-readelf to get addresses for admin.node native module
+`strings` to understand JS logic and find hidden admin panel
 
-r2 dissasemble the offsets (both user and pwd are hardcoded, no need for reversing)
+`readelf` to get addresses for admin.node native module
+
+`r2` disassemble the offsets (both user and pwd are hardcoded, no need for reversing)
 
 ```
 $ curl http://localhost:3000/admin/bettersafethisinbookmarkslol -X "POST" -H "Content-Type: application/json" -d '{"user":"snuffles", "pass":"wolol0o0"}'
