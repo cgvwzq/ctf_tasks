@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Law & Oracle</title>
+	<style>
+	div.title {
+		text-align: center;
+	}
+	</style>
+	<script src="/js/app.js"></script>
+	<script>
+	async function foo() {
+		let c = document.getElementById('content');
+		let h = await createhtml(c.value) || '<span style="color:red;">Say something, fellow robot!</span>';
+		c.value = '';
+		document.getElementById('ret').innerHTML = h;
+	}
+	</script>
+</head>
+<body>
+	<div class="title">
+	<h1>Build your own oracle with CSS!</h1>
+	<img src=https://vignette.wikia.nocookie.net/en.futurama/images/f/f6/Pickles.jpg/revision/latest/scale-to-width-down/350?cb=20111030031654>
+	</div>
+	<br>
+	<p id="ret"></p>
+	<textarea style="width:80%;height:120px" id="content"></textarea>
+	<br>
+	<button onclick="foo()">SEND</button>
+</body>
+</html>

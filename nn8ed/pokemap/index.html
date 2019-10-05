@@ -1,0 +1,39 @@
+<!doctype html><script async src=js/module.js></script><script>var verify,Module={onRuntimeInitialized:function(){verify=Module.cwrap("verify","number",["string"])}}</script><style>body{background:#adebad}div{margin:0 auto;width:50%}.modal{display:none;position:fixed;z-index:1;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:#000;background-color:rgba(0,0,0,.4)}.modal-content{background-color:#cacacaca;margin:15% auto;padding:20px;border:1px solid #888;width:30%}.close{color:#aaa;float:right;font-size:28px;font-weight:700}.close:focus,.close:hover{color:#000;text-decoration:none;cursor:pointer}</style><template id=template_pokemon><img src=__PATH__ style=height:150px><div><span>A wild pokemon appeared!</span><br><br><label for=q>What do you do?</label> <input data-name=__NAME__ id=q placeholder=nn8ed{...}></div></template><div><img src=img/logo.png style=height:180px alt=Pokemon></div><br><br><div class=modal id=popup><span class=close>×</span><div class=modal-content id=content></div></div><div><img src=img/map.png usemap=#planetmap><map name=planetmap><area alt=pikachu coords=420,100,30 id=i1 shape=circle><area alt=snorlax coords=280,160,30 id=i1 shape=circle><area alt=pinsir coords=350,280,30 id=i1 shape=circle><area alt=jynx coords=80,60,30 id=i1 shape=circle><area alt=exeggutor coords=120,360,30 id=i1 shape=circle><area alt=ponyta coords=20,300,30 id=i1 shape=circle></map></div><script>!function(){window.onclick=function(e){let t=document.getElementById("popup");e.target==t&&(t.lastChild.innerHTML="",t.style.display="none")},document.getElementsByClassName("close")[0].onclick=function(){let e=document.getElementById("popup");e.lastChild.innerHTML="",e.style.display="none"};let e=e=>(function(e){let t=document.getElementById("popup");t.lastChild.innerHTML=document.getElementById("template_pokemon").innerHTML.replace(/__PATH__/,`img/pokemons/${e}`).replace(/__NAME__/,`${e}`),t.style.display="block",document.getElementById("q").addEventListener("keyup",function(e){if(e.preventDefault(),13===e.keyCode){if("s"===e.target.dataset.name[0]&&0===verify(e.target.value))return void alert("ASI SE HACE! TU SI ERES UN VERDADERO ENTRENADOR! <3");alert(`${e.target.dataset.name} uso navajazo y huyo, es SUPER EFECTIVO...`)}})})(e);Array.from(document.getElementsByTagName("area")).map(t=>t.addEventListener("click",t=>e(t.target.alt)))}();</script>
+<!--
+(function(){
+    window.onclick = function(event) {
+        let modal = document.getElementById("popup");
+        if (event.target == modal) {
+            modal.lastChild.innerHTML = "";
+            modal.style.display = "none";
+        }
+    }
+    document.getElementsByClassName("close")[0].onclick = function() {
+        let modal = document.getElementById("popup");
+        modal.lastChild.innerHTML = "";
+        modal.style.display = "none";
+    }
+    function show(s) {
+        let modal = document.getElementById("popup");
+        modal.lastChild.innerHTML =
+            document.getElementById('template_pokemon').innerHTML.
+            replace(/__PATH__/, `img/pokemons/${s}`).
+            replace(/__NAME__/, `${s}`);
+        modal.style.display = "block";
+        document.getElementById("q").addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                if (event.target.dataset.name[0] === 's') {
+                    if (verify(event.target.value) === 0) {
+                        alert('ASI SE HACE! TU SI ERES UN VERDADERO ENTRENADOR! <3');
+                        return;
+                    }
+                }
+                alert(`${event.target.dataset.name} uso navajazo y huyo, es SUPER EFECTIVO...`);
+            }
+        });
+    }
+    let f = (i) => show(i);
+    Array.from(document.getElementsByTagName('area')).map(e => e.addEventListener('click', (e)=>f(e.target.alt)));
+    })();</script>
+    -->

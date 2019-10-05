@@ -1,0 +1,17 @@
+{
+  "name": "www",
+  "version": "1.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "ws": "^7.1.2",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

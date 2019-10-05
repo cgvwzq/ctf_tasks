@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<script async type="text/javascript" src="js/module.js"></script>
+<script>
+var verify, Module = {};
+Module['onRuntimeInitialized'] = function onRuntimeInitialized() {
+    verify = Module.cwrap('verify', 'number', ['string']);
+}
+</script>
+<style>
+body {
+    background: #adebad;
+}
+div {
+    margin: 0 auto;
+    width: 50%;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #cacacaca;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+<template id="template_pokemon">
+    <img style="height:150px" src="__PATH__">
+    <div>
+        <span>A wild pokemon appeared!</span><br><br>
+        <label for="q">What do you do?</label>
+        <input id="q" data-name="__NAME__" type="text" placeholder="nn8ed{...}">
+    </div>
+</template>
+</head>
+<body>
+    <div>
+        <img style="height:180px" src="img/logo.png" alt="Pokemon">
+    </div>
+    <br><br>
+    <div id="popup" class="modal"><span class="close">&times;</span><div id="content" class="modal-content"></div></div>
+    <div>
+    <img src="img/map.png" usemap="#planetmap">
+    <map name="planetmap">
+        <area id="i1" shape="circle" coords="420,100,30" alt="pikachu">
+        <area id="i1" shape="circle" coords="280,160,30" alt="snorlax">
+        <area id="i1" shape="circle" coords="350,280,30" alt="pinsir">
+        <area id="i1" shape="circle" coords="80,60,30" alt="jynx">
+        <area id="i1" shape="circle" coords="120,360,30" alt="exeggutor">
+        <area id="i1" shape="circle" coords="20,300,30" alt="ponyta">
+    </map>
+    </div>
+    <script>
+    (function(){
+    window.onclick = function(event) {
+        let modal = document.getElementById("popup");
+        if (event.target == modal) {
+            modal.lastChild.innerHTML = "";
+            modal.style.display = "none";
+        }
+    }
+    document.getElementsByClassName("close")[0].onclick = function() {
+        let modal = document.getElementById("popup");
+        modal.lastChild.innerHTML = "";
+        modal.style.display = "none";
+    }
+    function show(s) {
+        let modal = document.getElementById("popup");
+        modal.lastChild.innerHTML =
+            document.getElementById('template_pokemon').innerHTML.
+            replace(/__PATH__/, `img/pokemons/${s}`).
+            replace(/__NAME__/, `${s}`);
+        modal.style.display = "block";
+        document.getElementById("q").addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                if (event.target.dataset.name[0] === 's') {
+                    if (verify(event.target.value) === 0) {
+                        alert('ASI SE HACE! TU SI ERES UN VERDADERO ENTRENADOR! <3');
+                        return;
+                    }
+                }
+                alert(`${event.target.dataset.name} uso navajazo y huyo, es SUPER EFECTIVO...`);
+            }
+        });
+    }
+    let f = (i) => show(i);
+    Array.from(document.getElementsByTagName('area')).map(e => e.addEventListener('click', (e)=>f(e.target.alt)));
+    })();
+    </script>
+</body>
+</html>

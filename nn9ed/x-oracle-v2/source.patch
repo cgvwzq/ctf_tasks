@@ -1,0 +1,8 @@
+60c60
+<   cookie: { secure: false }
+---
+>   cookie: { secure: false, sameSite: 'strict' }
+141c141
+< 		res.setHeader('Content-Security-Policy', "default-src 'self' 'unsafe-inline'; img-src *; style-src *; font-src *");
+---
+> 		res.setHeader('Content-Security-Policy', "default-src 'self'; img-src *; style-src * 'unsafe-inline'; font-src *");
