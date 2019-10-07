@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Robo-MoJoJojo's return</title> <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.8.0/js/jquery.terminal.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.8.0/css/jquery.terminal.min.css" rel="stylesheet"/>
+<script>
+</script>
+<style>
+    body {
+        background: #0C0032;
+        font-family: fantasy;
+		color: #FFFFFF;
+    }
+    #header {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    #main {
+        width: 90%;
+        margin: 20px auto;
+        min-height: 320px;
+        background: #282828;
+        padding: 3%;
+    }
+    .left {
+        margin: 0;
+        width: 40%;
+        float: left;
+    }
+    .right {
+        float: right;
+        margin: 0 auto;
+        width: 50%;
+        text-align: center;
+        background: #240090;
+    }
+    #info {
+        text-align: justify;
+        margin: 10px 20px;
+        font-size: 12px;
+        min-height: 200px;;
+		overflow-x: auto;
+    }
+    pre {
+        margin: 0;
+    }
+    img {
+        max-width:100%;
+    }
+    .clear {
+        clear: left;
+    }
+    #footer {
+        margin: 10px auto;
+        text-align: center;
+        font-size: 12px;
+    }
+</style>
+</head>
+<body>
+<div id="header">
+	<h1>Robo-MoJoJojo's return</h1>
+    <marquee direction="right" scrollDelay="60">
+        <img height="60px" src="/robot.png"><span style="display:inline-block;width:50px;"></span><img height="60px" src="/spaceship.png">
+    </marquee>
+</div>
+<hr>
+<div id="main">
+    <div class="left">
+        <pre id="shell"></pre>
+    </div>
+    <div class="right">
+        <pre id="info">
+const crypto = require('crypto');
+const WebSocketServer = require('ws').Server;
+const vm = require('vm');
+
+const port = process.env.PORT || 7070;
+const secret = (key) => ((key == 1337) ? process.env.FLAG : 'fail');
+const wss = new WebSocketServer({ port: port });
+
+wss.on('connection', function connection(ws) {
+	const sandbox = {[crypto.randomBytes(32).toString('hex')] : secret};
+    ws.on('message', function incoming(message) {
+		console.log(message);
+		if (message.match(/^[a-z.()]+$/)) {
+			try {
+				let resp = vm.runInNewContext(message, sandbox, {timeout: 1000});
+				ws.send(JSON.stringify({response: String(resp)}));
+			} catch(e) {
+				ws.send(JSON.stringify({error: 'runtime error'}));
+			}
+		} else {
+			ws.send(JSON.stringify({error: 'noob'}));
+		}
+    });
+});
+		</pre>
+    </div>
+    </div>
+</div>
+<div class="clear"></div>
+<hr>
+<div id="footer">
+    <p>mojo jojo's design lab (c) 2016</p>
+</div>
+<script>
+function Session() {
+
+    var ws = new WebSocket('ws://mojo-ws.nn9ed.ka0labs.org'), shell = null;
+
+    ws.onclose = function(){ if (shell) shell.error('connection lost')};
+
+    ws.onmessage = function(msg) {
+        try {
+            var obj = JSON.parse(msg.data);
+        } catch (e) {
+            shell.error('unknown err');
+        }
+        if (obj.error) {
+            if (shell) shell.error(JSON.stringify(obj.error));
+        } else {
+            if (shell) shell.echo(JSON.stringify(obj.response));
+        }
+    }
+
+    function exec(command, term) {
+
+        shell = term; // improve
+
+        if (typeof command !== 'string') {
+            term.error('type err: unexpected input');
+            return;
+        } else if (ws.readyState != ws.OPEN) {
+            term.error('net error: no connection');
+        } else {
+            ws.send(command);
+        }
+
+    }
+
+    return { exec: exec}
+
+}
+let session = new Session();
+jQuery(function($, undefined) {
+    $('#shell').terminal(session.exec, {
+        greetings: `Robo-Mojo Jojo shell!\n\n`,
+        name: 'js',
+        height: 240,
+        prompt: 'rmJS> '
+    });
+});
+</script>
+</body>
+</html>
